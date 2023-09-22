@@ -1,0 +1,73 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'hackerrankInString' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static String hackerrankInString(String s) {
+
+        // Target the String we want
+        String target = "hackerrank";
+
+        // Initialize indices for both s and target
+        int i = 0; // For s
+        int j = 0; // For target
+
+        // Iterate s length
+        while (i < s.length() && j < target.length()) {
+            // If the current characters match, move to the next character in both strings
+            if (s.charAt(i) == target.charAt(j)) {
+                j++;
+            }
+            i++;
+        }
+
+        // If we have reached the end of the target string,
+        // it means we found a subsequence
+        if (j == target.length()) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = Integer.parseInt(bufferedReader.readLine().trim());
+
+        IntStream.range(0, q).forEach(qItr -> {
+            try {
+                String s = bufferedReader.readLine();
+
+                String result = Result.hackerrankInString(s);
+
+                bufferedWriter.write(result);
+                bufferedWriter.newLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
